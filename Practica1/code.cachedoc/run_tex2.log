@@ -1,0 +1,17 @@
+This is TeXk, Version 3.141592653 (TeX Live 2022/dev/Debian) (preloaded format=tex)
+
+(./code.texic (./texinfo.tex Loading texinfo package [Version 2.257]: Basics,
+fonts, page headings, tables, indexing, sectioning, toc, environments, defuns,
+macros, cross references, paper sizes, and turning on texinfo input format.)
+(./code.aux) [1] [2] (./code.toc) [-1] (./codeintro.texic (code) [1] [2]
+Overfull \hbox (263.506pt too wide) in paragraph at lines 242--243
+ @texttt convert([[h(0),h(1)],[h(f),h(e)]],[[b(0),b(0),b(0),b(0),b(0),b(0),b(0)
+,b(1)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(0)]])[] |
+
+Overfull \hbox (285.18721pt too wide) in paragraph at lines 247--252
+ @texttt convert([[h(0),h(1)],[h(f),h(e)]],[[b(0),b(0),b(0),b(0),b(0),b(0),b(0)
+,b(1)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(0)]])[]|
+[3] [4] [5]) [6] )
+(see the transcript file for additional information)
+Output written on code.dvi (9 pages, 25380 bytes).
+Transcript written on code.log.

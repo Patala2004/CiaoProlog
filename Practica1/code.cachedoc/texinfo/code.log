@@ -1,0 +1,144 @@
+This is TeXk, Version 3.141592653 (TeX Live 2022/dev/Debian) (preloaded format=tex 2025.4.3)  3 APR 2025 01:34
+ file:line:error style messages enabled.
+**\nonstopmode\input code.texic
+(./code.texic (./texinfo.tex Loading texinfo package [Version 2.257]: Basics,
+\bindingoffset=\dimen16
+\normaloffset=\dimen17
+\pagewidth=\dimen18
+\pageheight=\dimen19
+\outerhsize=\dimen20
+\outervsize=\dimen21
+\cornerlong=\dimen22
+\cornerthick=\dimen23
+\topandbottommargin=\dimen24
+\headlinebox=\box16
+\footlinebox=\box17
+\margin=\insert252
+\EMsimple=\toks12
+\singlespaceskip=\skip18
+\groupinvalidhelp=\toks13
+\mil=\dimen25
+\exdentamount=\skip19
+\inmarginspacing=\skip20
+
+fonts,
+\sffam=\fam8
+\mainmagstep=\count26
+\fontdepth=\count27
+ page headings,
+\titlepagetopglue=\skip21
+\titlepagebottomglue=\skip22
+\evenheadline=\toks14
+\oddheadline=\toks15
+\evenfootline=\toks16
+\oddfootline=\toks17
+ tables,
+\tableindent=\dimen26
+\itemindent=\dimen27
+\itemmargin=\dimen28
+\itemmax=\dimen29
+\itemno=\count28
+\multitableparskip=\skip23
+\multitableparindent=\skip24
+\multitablecolspace=\dimen30
+\multitablelinespace=\skip25
+\colcount=\count29
+ indexing,
+\secondaryindent=\skip26
+\partialpage=\box18
+\doublecolumnhsize=\dimen31
+ sectioning,
+\chapno=\count30
+\secno=\count31
+\subsecno=\count32
+\subsubsecno=\count33
+\appendixno=\count34
+\absseclevel=\count35
+\secbase=\count36
+\chapheadingskip=\skip27
+\secheadingskip=\skip28
+\subsecheadingskip=\skip29
+ toc,
+\tocfile=\write0
+\contentsrightmargin=\skip30
+\savepageno=\count37
+\lastnegativepageno=\count38
+\shortappendixwidth=\dimen32
+\tocindent=\dimen33
+ environments,
+\dblarrowbox=\box19
+\longdblarrowbox=\box20
+\pushcharbox=\box21
+\bullbox=\box22
+\equivbox=\box23
+\errorbox=\box24
+\lispnarrowing=\skip31
+\envskipamount=\skip32
+\circthick=\dimen34
+\cartouter=\dimen35
+\cartinner=\dimen36
+\normbskip=\skip33
+\normpskip=\skip34
+\normlskip=\skip35
+\lskip=\skip36
+\rskip=\skip37
+ defuns,
+\defbodyindent=\skip38
+\defargsindent=\skip39
+\deftypemargin=\skip40
+\deflastargmargin=\skip41
+\parencount=\count39
+
+macros,
+\macscribble=\write1
+\paramno=\count40
+\macname=\toks18
+ cross references,
+\auxfile=\write2
+\footnoteno=\count41
+\noepsfhelp=\toks19
+\countUTFx=\count42
+\countUTFy=\count43
+\countUTFz=\count44
+ paper sizes,
+\defaultparindent=\dimen37
+ and turning on texinfo input format.)
+(./code.aux)
+@fnindfile=@write3
+ [1] [2] (./code.toc) [-1] (./codeintro.texic (code) [1] [2]
+Overfull \hbox (263.506pt too wide) in paragraph at lines 242--243
+ @texttt convert([[h(0),h(1)],[h(f),h(e)]],[[b(0),b(0),b(0),b(0),b(0),b(0),b(0)
+,b(1)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(0)]])[] |
+
+@hbox(7.60416+1.52081)x455.24408
+.@glue(@leftskip) 28.90755
+.@texttt c
+.@texttt o
+.@texttt n
+.@texttt v
+.etc.
+
+
+Overfull \hbox (285.18721pt too wide) in paragraph at lines 247--252
+ @texttt convert([[h(0),h(1)],[h(f),h(e)]],[[b(0),b(0),b(0),b(0),b(0),b(0),b(0)
+,b(1)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(0)]])[]|
+
+@hbox(7.60416+1.52081)x455.24408
+.@glue(@leftskip) 50.58876
+.@texttt c
+.@texttt o
+.@texttt n
+.@texttt v
+.etc.
+
+[3] [4] [5]) [6] ) 
+Here is how much of TeX's memory you used:
+ 1468 strings out of 497972
+ 13529 string characters out of 6220666
+ 38984 words of memory out of 5000000
+ 2357 multiletter control sequences out of 15000+600000
+ 30088 words of font info for 104 fonts, out of 8000000 for 9000
+ 19 hyphenation exceptions out of 8191
+ 14i,5n,13p,580b,307s stack positions out of 5000i,500n,10000p,200000b,80000s
+
+Output written on code.dvi (9 pages, 25380 bytes).

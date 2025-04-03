@@ -1,0 +1,4 @@
+filetype(module).
+main_title([[string_esc("Práctica 1: En Binario y Hexadecimal")]]).
+sect([level(0)],global_label("Práctica 1: En Binario y Hexadecimal"),[string_esc("Práctica 1: En Binario y Hexadecimal")]).
+refs_link(codeintro).

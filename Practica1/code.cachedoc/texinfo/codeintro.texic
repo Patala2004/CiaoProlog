@@ -1,0 +1,525 @@
+
+@node code, , Top, Top
+@comment node-name, next, previous, up
+@unnumbered code
+
+Documentacion de la práctica 1 de Christian Most Tazon. Esta práctica trata con operaciones de bytes y listas de bytes, siendo los bytes o una lista de 8 bits o una representacion hexadecimal de estos.
+
+@section Usage and interface
+@cartouche
+@itemize @bullet
+@item @b{Library usage:}
+
+@code{:- use_module(/home/patala/Desktop/CiaoProlog/Practica1/code.pl).}
+@item @b{Exports:}
+
+@itemize @minus
+@item @i{Predicates:}
+
+@code{bit/1}, @code{binary_byte/1}, @code{hexd/1}, @code{hex_byte/1}, @code{byte_list/1}, @code{byte_convert/2}, @code{byte_list_convert/2}, @code{get_nth_bit_from_byte/3}, @code{reverse_byte/2}, @code{convert_binary_to_bit_list/2}, @code{convert_to_bit_list/2}, @code{convert_to_binary_list/2}, @code{convert_to_byte_list/2}, @code{convert_binary_list_to_hex/2}, @code{displace_bit_list_to_left/2}, @code{displace_bit_list_to_right/2}, @code{byte_list_clsh/2}, @code{byte_list_crsh/2}, @code{byte_xor/3}, @code{bit_xor/3}.
+@end itemize
+@end itemize
+@end cartouche
+@section Documentation on exports
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{bit/1 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE bit/1:
+
+@b{Usage:} @code{bit(+BinaryValue)}
+
+define los valores posibles de un bit como b(0) o b(1)
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{binary_byte/1 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE binary_byte/1:
+Se usa para comprobar si un byte está escrito en formato binario
+
+@b{Usage:} @code{binary_byte(+[B1,B2,B3,B4,B5,B6,B7,B8])}
+
+define un byte binario como una lista de 8 bits
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{hexd/1 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE hexd/1:
+
+@b{Usage:} @code{hexd(+HexValue)}
+
+define la representacion de valores hexadecimales como h(0), ..., h(f)
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{hex_byte/1 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE hex_byte/1:
+Se usa para comprobar si un byte está escrito en formato hexadecimal
+
+@b{Usage:} @code{hex_byte(+[NIBBLE1,NIBBLE2])}
+
+define un byte hexadecimal como una lista de dos nibbles / digitos hexadecimales
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{byte_list/1 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE byte_list/1:
+Predicado usado para comprobar si una lista es una lista de bytes validos
+
+@b{Usage:} @code{byte_list(+LISTA_BYTES)}
+
+Es cierto si @code{LISTA_BYTES} es una lista formada por bytes, ya sean hexadecimales o binarios
+@itemize @minus
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Example:} @code{byte_list([])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_list([])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_list([[b(0),b(1),b(0),b(1),b(0),b(1),b(1),b(0)]])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_list([[b(0),b(1),b(0),b(1),b(0),b(1),b(1),b(0)]])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_list([[h(1),h(c)]])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_list([[h(1),h(c)]])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_list([[b(1),b(1),b(0),b(1),b(0),b(1),b(0),b(0)],[h(c),h(1)]])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_list([[b(1),b(1),b(0),b(1),b(0),b(1),b(0),b(0)],[h(c),h(1)]])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{byte_convert/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE byte_convert/2:
+Predicado usado para comprobar si dos bytes, uno binario y otro decimal, son equivalentes, y también usado para cambiar el formato de un byte
+
+@b{Usage:} @code{byte_convert(+ByteHexadecimal,+ByteBinario)}
+
+Es cierto si @code{ByteHexadecimal} y @code{ByteBinario} son equivalentes
+@itemize @minus
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Example:} @code{byte_convert([h(0),h(0)],[b(0),b(0),b(0),b(0),b(0),b(0),b(0),b(0)])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_convert([h(0),h(0)],[b(0),b(0),b(0),b(0),b(0),b(0),b(0),b(0)])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_convert([h(f),h(f)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(1)])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_convert([h(f),h(f)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(1)])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_convert([h(1),h(2)],[b(0),b(0),b(0),b(1),b(0),b(0),b(1),b(0)])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_convert([h(1),h(2)],[b(0),b(0),b(0),b(1),b(0),b(0),b(1),b(0)])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_convert([h(3),h(4)],[b(0),b(0),b(1),b(1),b(0),b(1),b(0),b(0)])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_convert([h(3),h(4)],[b(0),b(0),b(1),b(1),b(0),b(1),b(0),b(0)])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{byte_convert([h(5),h(6)],[b(0),b(1),b(0),b(1),b(0),b(1),b(1),b(0)])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_convert([h(5),h(6)],[b(0),b(1),b(0),b(1),b(0),b(1),b(1),b(0)])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{byte_list_convert/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE byte_list_convert/2:
+Predicado usado para transformar una lista de bytes de un formato al otro formato. Se usa en predicados que tienen que realizar operaciones binarias sobre bytes que pueden ser hexadecimales
+
+@b{Usage:} @code{byte_list_convert(+HexadecimalByteList,+BinaryByteList)}
+
+Es cierto si @code{HexadecimalByteList} y @code{BinaryByteList} son listas de bytes equivalentes
+@itemize @minus
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Example:} @code{byte_list_convert([[h(0),h(1)],[h(f),h(e)]],[[b(0),b(0),b(0),b(0),b(0),b(0),b(0),b(1)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(0)]])}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{byte_list_convert([[h(0),h(1)],[h(f),h(e)]],[[b(0),b(0),b(0),b(0),b(0),b(0),b(0),b(1)],[b(1),b(1),b(1),b(1),b(1),b(1),b(1),b(0)]])} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{get_nth_bit_from_byte/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE get_nth_bit_from_byte/3:
+
+@b{Usage:} @code{get_nth_bit_from_byte(+Index,+Byte,+NthBit)}
+
+Es cierto si @code{NthBit} es el bit numero @code{Index} del byte @code{Byte}. Se cuenta desde el byte menos significativo (desde la derecha)
+@itemize @minus
+@end itemize
+
+@b{Other properties:} 
+
+
+@b{Example:} @code{get_nth_bit_from_byte(0,[h(0),h(0)],b(0))}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{get_nth_bit_from_byte(0,[h(0),h(0)],b(0))} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{get_nth_bit_from_byte(s(0),[h(0),h(0)],b(0))}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{get_nth_bit_from_byte(s(0),[h(0),h(0)],b(0))} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{get_nth_bit_from_byte(0,[h(f),h(f)],b(0))}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+Calls of the form @code{get_nth_bit_from_byte(0,[h(f),h(f)],b(0))} fail.
+@iftex
+@hfill
+@end iftex
+ (@code{fails/1})
+@end itemize
+
+@b{Example:} @code{get_nth_bit_from_byte(0,[h(f),h(f)],b(1))}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{get_nth_bit_from_byte(0,[h(f),h(f)],b(1))} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+
+@b{Example:} @code{get_nth_bit_from_byte(s(s(s(0))),[b(1),b(1),b(1),b(1),b(0),b(1),b(1),b(1)],b(0))}
+
+@itemize @minus
+@item @i{The following properties should hold globally:}
+
+All the calls of the form @code{get_nth_bit_from_byte(s(s(s(0))),[b(1),b(1),b(1),b(1),b(0),b(1),b(1),b(1)],b(0))} do not fail.
+@iftex
+@hfill
+@end iftex
+ (@code{not_fails/1})
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{reverse_byte/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE reverse_byte/2:
+Da la vuelta a un byte, invirtiendo la significancia de cada bit, y lo devuelve en un parametro de salida.
+
+@b{Usage:} @code{reverse_byte(+Byte,+ReversedByte)}
+
+Es cierto si @code{ReversedByte} es @code{Byte} dado la vuelta
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{convert_binary_to_bit_list/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE convert_binary_to_bit_list/2:
+Es una funcion auxiliar de 'convert_to_bit_list/2' que solo acepta bytes en formato binario. Saca los bits de los bytes de una lista de bytes y devuelve una lista de estos bits. Se puede entender como que 'unifica' los bits de una lista de bytes en una única entidad para facilitar operaciones a nivel bit sobre un conjunto seguido de bytes.
+
+@b{Usage:} @code{convert_binary_to_bit_list(+ByteList,+BitList)}
+
+Es cierto si @code{BitList} es una lista de los bits que forman los bytes de la lista de bytes binarios @code{ByteList}
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{convert_to_bit_list/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE convert_to_bit_list/2:
+Saca los bits de los bytes de una lista de bytes y devuelve una lista de estos bits. Se puede entender como que 'unifica' los bits de una lista de bytes en una única entidad para facilitar operaciones a nivel bit sobre un conjunto seguido de bytes. Usa la funcion convert_binary_to_bit_list/2 y convert_to_binary_list/2 para transformar listas de cualquier formato de byte a bits.
+
+@b{Usage:} @code{convert_to_bit_list(+ByteList,+BitList)}
+
+Es cierto si @code{BitList} es una lista de los bits que forman los bytes de la lista de bytes en cualquier formato @code{ByteList}
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{convert_to_binary_list/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE convert_to_binary_list/2:
+Transforma una lista de bytes a una lista de bytes en formato binario. Para hacer esto transforma bytes de formato hexadecimal a decimal y copia bytes que ya están en formato binario. Debido a esto, la función devuelve siempre lo mismo sin necesidad de revisar que la lista a transformar no está ya en formato binario.
+
+@b{Usage:} @code{convert_to_binary_list(+ByteList,+BinaryByteList)}
+
+Es cierto si @code{BinaryByteList} es una lista de bytes en formato binario equivalentes a la lista de bytes @code{ByteList}
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{convert_to_byte_list/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE convert_to_byte_list/2:
+Junta los bits de BitList en grupos de 8 bits, formando bytes binarios, y devuelve una lista de estos bytes
+
+@b{Usage:} @code{convert_to_byte_list(+BitList,+ByteList)}
+
+Es cierto si @code{ByteList} es una lista de bytes con los mismos bits que @code{BitList}, en el mismo orden
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{convert_binary_list_to_hex/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE convert_binary_list_to_hex/2:
+Transforma el formato de los bytes de una lista de bytes al otro. Es util para cuando hay que realizar operaciones binarias sobre listas de bytes en formato hexadecimal.
+
+@b{Usage:} @code{convert_binary_list_to_hex(+BinaryByteList,+HexadecimalByteList)}
+
+Es cierto si @code{HexadecimalByteList} es una lista de bytes en formato hexadecimal equivalente a la lista de bytes en formato binario @code{BinaryByteList} 
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{displace_bit_list_to_left/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE displace_bit_list_to_left/2:
+Produce un desplazamiento logico a la izquierda de una lista de bits. Mueve el primer bit al final de la lista.
+
+@b{Usage:} @code{displace_bit_list_to_left(+BitList,+DisplacedList)}
+
+Es cierto si @code{DisplacedList} es una lista de bits equivalente a @code{BitList} tras un desplazamiento lógico a la izquierda.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{displace_bit_list_to_right/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE displace_bit_list_to_right/2:
+Produce un desplazamiento logico a la derecha de una lista de bits. Mueve el ultimo bit al principio de la lista.
+
+@b{Usage:} @code{displace_bit_list_to_right(+BitList,+DisplacedList)}
+
+Es cierto si @code{DisplacedList} es una lista de bits equivalente a @code{BitList} tras un desplazamiento lógico a la derecha.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{byte_list_clsh/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE byte_list_clsh/2:
+Produce un desplazamiento lógico a la izquierda a nivel bit de la lista de bytes ByteList. El resultado mantiene el formato de bytes de la entrada, pero la lista tiene que estar formada por bytes de un único tipo de formato.
+
+@b{Usage:} @code{byte_list_clsh(+ByteList,+ByteListLeftShift)}
+
+Es cierto si la lista de bytes en cualquier formato @code{ByteListLeftShift} es @code{ByteList} tras un desplazamiento lógico a la izquierda a nivel bit.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{byte_list_crsh/2 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE byte_list_crsh/2:
+Produce un desplazamiento lógico a la derecha a nivel bit de la lista de bytes ByteList. El resultado mantiene el formato de bytes de la entrada, pero la lista tiene que estar formada por bytes de un único tipo de formato.
+
+@b{Usage:} @code{byte_list_crsh(+ByteList,+ByteListRightShift)}
+
+Es cierto si la lista de bytes en cualquier formato @code{ByteListRightShift} es @code{ByteList} tras un desplazamiento lógico a la derecha a nivel bit.
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{byte_xor/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE byte_xor/3:
+Realiza la operacion 'XOR' entre dos bytes en cualquier formato y devuelve el resultado de la operacion en un parametro de salida, mantendiendo el formato de los bytes. Todos los bytes tienen que tener el mismo formato.
+
+@b{Usage:} @code{byte_xor(+Byte1,+Byte2,+ResultByte)}
+
+devuelve cierto si @code{ResultByte} es el byte resultante de la operación 'XOR' entre los bytes @code{Byte1} y @code{Byte2}
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@iftex
+@edef@temp{@noexpand@writetocentry{@realbackslash unnumbsubsubsecentry{bit_xor/3 (pred)}}}
+@temp
+@end iftex
+@deffn PREDICATE bit_xor/3:
+Realiza la operacion lógica 'XOR' entre dos bits y devuelve el bit resultante. Este predicado define la tabla lógica de la operación 'XOR'.
+
+@b{Usage:} @code{bit_xor(+Bit1,+Bit2,+ResultBit)}
+
+devuelve cierto si @code{ResultBit} es el but resultante de la operación 'XOR' entre los bit @code{Bit1} y @code{Bit2}
+@itemize @minus
+@end itemize
+@end deffn
+@sp 1
+
+@section Documentation on imports
+This module has the following direct dependencies:
+@itemize @minus
+@item @i{Application modules:}
+
+@code{unittest}.
+@item @i{Internal (engine) modules:}
+
+@code{term_basic}, @code{basiccontrol}, @code{debugger_support}, @code{basic_props}.
+@item @i{Packages:}
+
+@code{pure}, @code{initial}, @code{condcomp}, @code{assertions}, @code{assertions/assertions_basic}, @code{regtypes}.
+@end itemize
